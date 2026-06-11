@@ -483,6 +483,287 @@ gh pr merge
 
 gh run list
 ```
+# GitHub CLI Complete Workflow
+
+## 1. Create an Issue
+
+Work starts with a ticket/issue.
+
+```bash
+gh issue create
+```
+
+Example:
+
+```text
+Title:
+Add project documentation
+
+Body:
+Create a professional README for the GitHub CLI lab.
+```
+
+Verify:
+
+```bash
+gh issue list
+```
+
+View details:
+
+```bash
+gh issue view 1 --json title,body,url
+```
+
+---
+
+## 2. Create Feature Branch
+
+Start work from main.
+
+```bash
+git switch -c feature-readme
+```
+
+Verify:
+
+```bash
+git branch
+```
+
+Output:
+
+```text
+* feature-readme
+  main
+```
+
+---
+
+## 3. Make Changes
+
+Edit files.
+
+Example:
+
+```bash
+nano README.md
+```
+
+Verify changes:
+
+```bash
+git status
+```
+
+---
+
+## 4. Stage Changes
+
+Add files to staging area.
+
+```bash
+git add README.md
+```
+
+Verify:
+
+```bash
+git status
+```
+
+Output:
+
+```text
+Changes to be committed
+```
+
+---
+
+## 5. Commit Changes
+
+Save work locally.
+
+```bash
+git commit -m "Add GitHub CLI lab documentation"
+```
+
+---
+
+## 6. Push Feature Branch
+
+Send branch to GitHub.
+
+```bash
+git push -u origin feature-readme
+```
+
+GitHub now has:
+
+```text
+main
+feature-readme
+```
+
+---
+
+## 7. Create Pull Request
+
+IMPORTANT:
+Remain on feature-readme branch.
+
+```bash
+gh pr create
+```
+
+GitHub automatically detects:
+
+```text
+Source Branch:
+feature-readme
+
+Target Branch:
+main
+```
+
+PR created.
+
+---
+
+## 8. View Pull Requests
+
+List PRs:
+
+```bash
+gh pr list
+```
+
+View details:
+
+```bash
+gh pr view 2 --json title,state,url,headRefName,baseRefName
+```
+
+Output:
+
+```text
+feature-readme
+        ↓
+       main
+```
+
+---
+
+## 9. Merge Pull Request
+
+Still no need to switch to main.
+
+```bash
+gh pr merge 2
+```
+
+Choose:
+
+```text
+Squash and Merge
+```
+
+GitHub merges:
+
+```text
+feature-readme
+      ↓
+     main
+```
+
+on GitHub's servers.
+
+---
+
+## 10. Delete Feature Branch
+
+GitHub CLI asks:
+
+```text
+Delete local and remote branch?
+```
+
+Choose:
+
+```text
+Yes
+```
+
+GitHub CLI:
+
+```text
+Deletes feature-readme
+Switches back to main
+```
+
+---
+
+## 11. Close Issue
+
+PR merge does NOT automatically close the issue unless you use:
+
+```text
+Closes #1
+```
+
+inside the PR.
+
+Manual close:
+
+```bash
+gh issue close 1
+```
+
+Verify:
+
+```bash
+gh issue list
+```
+
+Output:
+
+```text
+No open issues
+```
+
+---
+
+## Final State
+
+```text
+Issue Created
+      ↓
+Feature Branch Created
+      ↓
+Code Changes
+      ↓
+git add
+      ↓
+git commit
+      ↓
+git push
+      ↓
+Pull Request
+      ↓
+Review
+      ↓
+Merge
+      ↓
+Delete Branch
+      ↓
+Close Issue
+      ↓
+Back on Main
+```
+
+This is the standard workflow used by most software engineering, cloud engineering, and DevOps teams.
+
+
 
 ---
 
